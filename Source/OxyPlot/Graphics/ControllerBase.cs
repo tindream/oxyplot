@@ -173,7 +173,9 @@ namespace OxyPlot
                     m.Delta(args);
                 }
 
-                return args.Handled;
+                var command = this.GetCommand(new OxyMouseMoveGesture());
+                return this.HandleCommand(command, view, args);
+                //return args.Handled;
             }
         }
 
@@ -342,6 +344,16 @@ namespace OxyPlot
             this.MouseDownManipulators.Add(manipulator);
             manipulator.Started(args);
         }
+        /// <summary>
+        /// </summary>
+        public virtual void AddMouseManipulator(
+            IView view,
+            ManipulatorBase<OxyMouseEventArgs> manipulator,
+            OxyMouseEventArgs args)
+        {
+            this.MouseDownManipulators.Add(manipulator);
+            manipulator.Started(args);
+        }
 
         /// <summary>
         /// Adds the specified mouse hover manipulator and invokes the <see cref="MouseManipulator.Started" /> method with the specified mouse event arguments.
@@ -379,6 +391,12 @@ namespace OxyPlot
         /// <param name="gesture">The gesture.</param>
         /// <param name="command">The command. If <c>null</c>, the binding will be removed.</param>
         public virtual void Bind(OxyMouseDownGesture gesture, IViewCommand<OxyMouseDownEventArgs> command)
+        {
+            this.BindCore(gesture, command);
+        }
+        /// <summary>
+        /// </summary>
+        public virtual void Bind(OxyMouseMoveGesture gesture, IViewCommand<OxyMouseEventArgs> command)
         {
             this.BindCore(gesture, command);
         }

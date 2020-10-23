@@ -47,6 +47,12 @@ namespace OxyPlot
         {
             controller.Bind(new OxyMouseDownGesture(mouseButton), command);
         }
+        /// <summary>
+        /// </summary>
+        public static void BindMouseMove(this IController controller, IViewCommand<OxyMouseEventArgs> command)
+        {
+            controller.Bind(new OxyMouseMoveGesture(), command);
+        }
 
         /// <summary>
         /// Binds the specified modifier+mouse button gesture to the specified command.

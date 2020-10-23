@@ -52,12 +52,13 @@ namespace AnimationsDemo
                 MarkerStroke = OxyColor.Parse("#4CAF50"),
                 MarkerStrokeThickness = 1.5,
                 MarkerType = MarkerType.Circle,
+                InterpolationAlgorithm = InterpolationAlgorithms.CatmullRomSpline,
                 StrokeThickness = 1,
             };
             plotModel.Series.Add(series);
 
             var annotation = new LineAnnotation
-            {
+            {//横线
                 Type = LineAnnotationType.Horizontal,
                 Y = 0
             };

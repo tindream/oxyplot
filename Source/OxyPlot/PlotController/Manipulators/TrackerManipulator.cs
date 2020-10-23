@@ -100,9 +100,16 @@ namespace OxyPlot
                 return;
             }
 
+            string desc = string.Empty;
+            foreach (var series in actualModel.Series)//多曲线显示
+            {
+                var temp = GetNearestHit(series, e.Position, this.Snap, this.PointsOnly);
+                if (temp != null) desc += temp.Text;
+            }
             var result = GetNearestHit(this.currentSeries, e.Position, this.Snap, this.PointsOnly);
             if (result != null)
             {
+                result.Text = desc;
                 result.PlotModel = this.PlotView.ActualModel;
                 this.PlotView.ShowTracker(result);
                 this.PlotView.ActualModel.RaiseTrackerChanged(result);
@@ -141,7 +148,7 @@ namespace OxyPlot
                 var result = series.GetNearestPoint(point, false);
                 if (result != null)
                 {
-                    if (result.Position.DistanceTo(point) < 20)
+                    //if (result.Position.DistanceTo(point) < 20)//不限定范围，显示当前曲线点
                     {
                         return result;
                     }

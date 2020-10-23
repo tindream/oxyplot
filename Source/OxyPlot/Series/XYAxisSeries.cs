@@ -324,7 +324,8 @@ namespace OxyPlot.Series
                 }
 
                 var sp = this.Transform(p.x, p.y);
-                double d2 = (sp - point).LengthSquared;
+                //double d2 = (sp - point).LengthSquared;
+                double d2 = Math.Abs(sp.x - point.x);//X轴坐标定位显示
 
                 if (d2 < minimumDistance)
                 {
@@ -805,7 +806,7 @@ namespace OxyPlot.Series
                     end = curGuess - 1;
                 }
                 else
-                { 
+                {
                     start = curGuess;
                 }
 
@@ -818,7 +819,7 @@ namespace OxyPlot.Series
                 double startX = GetX(start);
 
                 var m = (end - start + 1) / (endX - startX);
-                
+
                 curGuess = start + (int)((targetX - startX) * m);
                 curGuess = Math.Max(start + 1, Math.Min(curGuess, end));
             }

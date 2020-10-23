@@ -110,6 +110,9 @@ namespace OxyPlot
         /// <param name="manipulator">The manipulator to add.</param>
         /// <param name="args">The <see cref="OxyMouseEventArgs" /> instance containing the event data.</param>
         void AddMouseManipulator(IView view, ManipulatorBase<OxyMouseEventArgs> manipulator, OxyMouseDownEventArgs args);
+        /// <summary>
+        /// </summary>
+        void AddMouseManipulator(IView view, ManipulatorBase<OxyMouseEventArgs> manipulator, OxyMouseEventArgs args);
 
         /// <summary>
         /// Adds the specified mouse hover manipulator and invokes the <see cref="MouseManipulator.Started" /> method with the specified mouse event arguments.
@@ -133,6 +136,9 @@ namespace OxyPlot
         /// <param name="gesture">The mouse down gesture.</param>
         /// <param name="command">The command. If <c>null</c>, the binding will be removed.</param>
         void Bind(OxyMouseDownGesture gesture, IViewCommand<OxyMouseDownEventArgs> command);
+        /// <summary>
+        /// </summary>
+        void Bind(OxyMouseMoveGesture gesture, IViewCommand<OxyMouseEventArgs> command);
 
         /// <summary>
         /// Binds the specified command to the specified mouse enter gesture. Removes old bindings to the gesture.

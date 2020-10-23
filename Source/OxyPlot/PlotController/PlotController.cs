@@ -27,14 +27,14 @@ namespace OxyPlot
             // Reset bindings: Same as zoom rectangle, but double click / A key
             this.BindMouseDown(OxyMouseButton.Middle, OxyModifierKeys.None, 2, PlotCommands.ResetAt);
             this.BindMouseDown(OxyMouseButton.Right, OxyModifierKeys.Control, 2, PlotCommands.ResetAt);
-            this.BindMouseDown(OxyMouseButton.Left, OxyModifierKeys.Control | OxyModifierKeys.Alt, 2, PlotCommands.ResetAt);
+            this.BindMouseDown(OxyMouseButton.Left, OxyModifierKeys.None, 2, PlotCommands.ResetAt);//双击重置
             this.BindKeyDown(OxyKey.A, PlotCommands.Reset);
             this.BindKeyDown(OxyKey.C, OxyModifierKeys.Control | OxyModifierKeys.Alt, PlotCommands.CopyCode);
             this.BindKeyDown(OxyKey.Home, PlotCommands.Reset);
             this.BindCore(new OxyShakeGesture(), PlotCommands.Reset);
 
             // Pan bindings: RMB / alt LMB / Up/down/left/right keys (panning direction on axis is opposite of key as it is more intuitive)
-            this.BindMouseDown(OxyMouseButton.Right, PlotCommands.PanAt);
+            this.BindMouseDown(OxyMouseButton.Left, PlotCommands.PanAt);//左键移动
             this.BindMouseDown(OxyMouseButton.Left, OxyModifierKeys.Alt, PlotCommands.PanAt);
             this.BindKeyDown(OxyKey.Left, PlotCommands.PanLeft);
             this.BindKeyDown(OxyKey.Right, PlotCommands.PanRight);
@@ -48,7 +48,8 @@ namespace OxyPlot
             this.BindTouchDown(PlotCommands.PanZoomByTouch);
 
             // Tracker bindings: LMB
-            this.BindMouseDown(OxyMouseButton.Left, PlotCommands.SnapTrack);
+            this.BindMouseMove(PlotCommands.SnapTrackMove);
+            //this.BindMouseDown(OxyMouseButton.Left, PlotCommands.SnapTrack);
             this.BindMouseDown(OxyMouseButton.Left, OxyModifierKeys.Control, PlotCommands.Track);
             this.BindMouseDown(OxyMouseButton.Left, OxyModifierKeys.Shift, PlotCommands.PointsOnlyTrack);
 
