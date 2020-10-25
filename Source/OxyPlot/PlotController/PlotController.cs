@@ -15,6 +15,10 @@ namespace OxyPlot
     public class PlotController : ControllerBase, IPlotController
     {
         /// <summary>
+        /// 小数据模式
+        /// </summary>
+        public static bool ISmall = true;
+        /// <summary>
         /// Initializes a new instance of the <see cref="PlotController" /> class.
         /// </summary>
         public PlotController()
@@ -34,7 +38,14 @@ namespace OxyPlot
             this.BindCore(new OxyShakeGesture(), PlotCommands.Reset);
 
             // Pan bindings: RMB / alt LMB / Up/down/left/right keys (panning direction on axis is opposite of key as it is more intuitive)
-            this.BindMouseDown(OxyMouseButton.Left, PlotCommands.PanAt);//左键移动
+            if (ISmall)
+            {
+                this.BindMouseDown(OxyMouseButton.Left, PlotCommands.PanAt);//左键移动
+            }
+            else
+            {
+                this.BindMouseDown(OxyMouseButton.Right, PlotCommands.PanAt);
+            }
             this.BindMouseDown(OxyMouseButton.Left, OxyModifierKeys.Alt, PlotCommands.PanAt);
             this.BindKeyDown(OxyKey.Left, PlotCommands.PanLeft);
             this.BindKeyDown(OxyKey.Right, PlotCommands.PanRight);
@@ -48,8 +59,14 @@ namespace OxyPlot
             this.BindTouchDown(PlotCommands.PanZoomByTouch);
 
             // Tracker bindings: LMB
-            this.BindMouseMove(PlotCommands.SnapTrackMove);
-            //this.BindMouseDown(OxyMouseButton.Left, PlotCommands.SnapTrack);
+            if (ISmall)
+            {
+                this.BindMouseMove(PlotCommands.SnapTrackMove);
+            }
+            else
+            {
+                this.BindMouseDown(OxyMouseButton.Left, PlotCommands.SnapTrack);
+            }
             this.BindMouseDown(OxyMouseButton.Left, OxyModifierKeys.Control, PlotCommands.Track);
             this.BindMouseDown(OxyMouseButton.Left, OxyModifierKeys.Shift, PlotCommands.PointsOnlyTrack);
 
