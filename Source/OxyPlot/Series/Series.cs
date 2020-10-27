@@ -10,6 +10,7 @@
 namespace OxyPlot.Series
 {
     using OxyPlot.Axes;
+    using System;
 
     /// <summary>
     /// Provides an abstract base class for plot series.
@@ -72,6 +73,10 @@ namespace OxyPlot.Series
         /// The arguments for the format string may be different for each type of series. See the documentation.
         /// </remarks>
         public string TrackerFormatString { get; set; }
+        /// <summary>
+        /// 格式化方法
+        /// </summary>
+        public Func<string, string, object, string, object, string> TrackerFormatStringAction { get; set; }
 
         /// <summary>
         /// Gets or sets the key for the tracker to use on this series. The default is <c>null</c>.

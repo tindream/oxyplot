@@ -154,7 +154,7 @@ namespace OxyPlot.Series
         {
             var xy = this.InverseTransform(point);
             var targetX = xy.X;
-            int startIdx = this.IsXMonotonic 
+            int startIdx = this.IsXMonotonic
                 ? this.FindWindowStartIndex(this.ActualPoints, p => p.x, targetX, this.WindowStartIndex)
                 : 0;
             int startIdx2 = this.IsXMonotonic
@@ -187,15 +187,7 @@ namespace OxyPlot.Series
 
             if (result != null)
             {
-                result.Text = StringHelper.Format(
-                    this.ActualCulture,
-                    this.TrackerFormatString,
-                    result.Item,
-                    this.Title,
-                    this.XAxis.Title ?? XYAxisSeries.DefaultXAxisTitle,
-                    this.XAxis.GetValue(result.DataPoint.X),
-                    this.YAxis.Title ?? XYAxisSeries.DefaultYAxisTitle,
-                    this.YAxis.GetValue(result.DataPoint.Y));
+                result.Text = this.TrackerText(result);
             }
 
             return result;
@@ -257,7 +249,7 @@ namespace OxyPlot.Series
             areaContext.WindowStartIndex = startIdx2;
             areaContext.Reverse = this.Reverse2;
             areaContext.Color = this.ActualColor2;
-            
+
             var chunksOfPoints2 = this.RenderChunkedPoints(areaContext);
 
             if (chunksOfPoints.Count != chunksOfPoints2.Count)

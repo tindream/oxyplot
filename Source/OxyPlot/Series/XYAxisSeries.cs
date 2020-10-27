@@ -101,6 +101,32 @@ namespace OxyPlot.Series
         /// </summary>
         protected int WindowStartIndex { get; set; }
 
+        /// <summary>
+        /// 提示描述
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        protected string TrackerText(TrackerHitResult result)
+        {
+            if (this.TrackerFormatStringAction != null)
+            {
+                return this.TrackerFormatStringAction(this.Title,
+                    this.XAxis.Title ?? XYAxisSeries.DefaultXAxisTitle,
+                    this.XAxis.GetValue(result.DataPoint.X),
+                    this.YAxis.Title ?? XYAxisSeries.DefaultYAxisTitle,
+                    this.YAxis.GetValue(result.DataPoint.Y));
+            }
+            return StringHelper.Format(
+                this.ActualCulture,
+                this.TrackerFormatString,
+                result.Item,
+                this.Title,
+                this.XAxis.Title ?? XYAxisSeries.DefaultXAxisTitle,
+                this.XAxis.GetValue(result.DataPoint.X),
+                this.YAxis.Title ?? XYAxisSeries.DefaultYAxisTitle,
+                this.YAxis.GetValue(result.DataPoint.Y));
+        }
+
         /// <inheritdoc/>
         public override OxyRect GetClippingRect()
         {

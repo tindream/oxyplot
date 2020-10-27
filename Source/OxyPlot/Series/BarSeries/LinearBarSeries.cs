@@ -117,27 +117,16 @@ namespace OxyPlot.Series
             var dataPoint = this.ActualPoints[pointIndex];
             var item = this.GetItem(pointIndex);
 
-            // Format: {0}\n{1}: {2}\n{3}: {4}
-            var trackerParameters = new[]
-            {
-                this.Title,
-                this.XAxis.Title ?? "X",
-                this.XAxis.GetValue(dataPoint.X), 
-                this.YAxis.Title ?? "Y", 
-                this.YAxis.GetValue(dataPoint.Y),
-            };
-
-            var text = StringHelper.Format(this.ActualCulture, this.TrackerFormatString, item, trackerParameters);
-
-            return new TrackerHitResult
+            var result = new TrackerHitResult
             {
                 Series = this,
                 DataPoint = dataPoint,
                 Position = point,
                 Item = item,
                 Index = pointIndex,
-                Text = text,
             };
+            result.Text = this.TrackerText(result);
+            return result;
         }
 
         /// <inheritdoc/>
@@ -273,10 +262,10 @@ namespace OxyPlot.Series
                 var barColors = this.GetBarColors(actualPoint.Y);
 
                 rc.DrawRectangle(
-                    rectangle, 
-                    barColors.FillColor, 
-                    barColors.StrokeColor, 
-                    this.StrokeThickness, 
+                    rectangle,
+                    barColors.FillColor,
+                    barColors.StrokeColor,
+                    this.StrokeThickness,
                     this.EdgeRenderingMode.GetActual(EdgeRenderingMode.PreferSharpness));
             }
         }

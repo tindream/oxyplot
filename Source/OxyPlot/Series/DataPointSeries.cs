@@ -106,15 +106,7 @@ namespace OxyPlot.Series
 
             if (result != null)
             {
-                result.Text = StringHelper.Format(
-                    this.ActualCulture, 
-                    this.TrackerFormatString,
-                    result.Item,
-                    this.Title,
-                    this.XAxis.Title ?? XYAxisSeries.DefaultXAxisTitle,
-                    this.XAxis.GetValue(result.DataPoint.X),
-                    this.YAxis.Title ?? XYAxisSeries.DefaultYAxisTitle,
-                    this.YAxis.GetValue(result.DataPoint.Y));
+                result.Text = this.TrackerText(result);
             }
 
             return result;
