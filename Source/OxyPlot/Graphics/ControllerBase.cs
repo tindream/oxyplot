@@ -344,16 +344,6 @@ namespace OxyPlot
             this.MouseDownManipulators.Add(manipulator);
             manipulator.Started(args);
         }
-        /// <summary>
-        /// </summary>
-        public virtual void AddMouseManipulator(
-            IView view,
-            ManipulatorBase<OxyMouseEventArgs> manipulator,
-            OxyMouseEventArgs args)
-        {
-            this.MouseDownManipulators.Add(manipulator);
-            manipulator.Started(args);
-        }
 
         /// <summary>
         /// Adds the specified mouse hover manipulator and invokes the <see cref="MouseManipulator.Started" /> method with the specified mouse event arguments.
