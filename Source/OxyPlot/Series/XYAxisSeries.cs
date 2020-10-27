@@ -299,6 +299,8 @@ namespace OxyPlot.Series
             return this.GetNearestPointInternal(points, 0, point);
         }
 
+        private double lastPointX;
+        private TrackerHitResult lastResult;
         /// <summary>
         /// Gets the nearest point.
         /// </summary>
@@ -309,6 +311,7 @@ namespace OxyPlot.Series
         /// <remarks>The Text property of the result will not be set, since the formatting depends on the various series.</remarks>
         protected TrackerHitResult GetNearestPointInternal(IEnumerable<DataPoint> points, int startIdx, ScreenPoint point)
         {
+            if (lastPointX == point.x) return lastResult;
             var spn = default(ScreenPoint);
             var dpn = default(DataPoint);
             double index = -1;
@@ -341,7 +344,7 @@ namespace OxyPlot.Series
             if (minimumDistance < double.MaxValue)
             {
                 var item = this.GetItem((int)Math.Round(index));
-                return new TrackerHitResult
+                lastResult = new TrackerHitResult
                 {
                     Series = this,
                     DataPoint = dpn,
@@ -350,6 +353,8 @@ namespace OxyPlot.Series
                     Index = index
                 };
             }
+            else lastResult = null;
+            lastPointX = point.x;
 
             return null;
         }
