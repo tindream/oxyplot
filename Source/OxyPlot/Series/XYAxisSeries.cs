@@ -352,6 +352,7 @@ namespace OxyPlot.Series
                     Item = item,
                     Index = index
                 };
+                return lastResult;
             }
             else lastResult = null;
             lastPointX = point.x;

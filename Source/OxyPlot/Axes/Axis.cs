@@ -558,6 +558,10 @@ namespace OxyPlot.Axes
         /// Gets or sets the string format used for formatting the axis values. The default value is <c>null</c>.
         /// </summary>
         public string StringFormat { get; set; }
+        /// <summary>
+        /// 格式化方法
+        /// </summary>
+        public Func<object, string> StringFormatAction { get; set; }
 
         /// <summary>
         /// Gets or sets the tick style for major and minor ticks. The default value is <see cref="OxyPlot.Axes.TickStyle.Outside"/>.
@@ -1720,6 +1724,11 @@ namespace OxyPlot.Axes
                 }
 
                 return string.Format(this.ActualCulture, fmt, mantissa, exp);
+            }
+
+            if (this.StringFormatAction != null)
+            {
+                return this.StringFormatAction(x);
             }
 
             string format = string.Concat("{0:", this.ActualStringFormat ?? this.StringFormat ?? string.Empty, "}");
