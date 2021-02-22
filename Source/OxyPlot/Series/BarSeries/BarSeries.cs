@@ -238,6 +238,12 @@ namespace OxyPlot.Series
             var categoryAxis = this.GetCategoryAxis();
             var valueAxis = this.XAxis;
 
+            if (this.TrackerFormatStringAction != null)
+            {
+                return this.TrackerFormatStringAction(this.Title,
+                    null, categoryAxis.FormatValue(categoryIndex),
+                    null, valueAxis.GetValue(barItem.Value));
+            }
             return StringHelper.Format(
                 this.ActualCulture,
                 this.TrackerFormatString,
