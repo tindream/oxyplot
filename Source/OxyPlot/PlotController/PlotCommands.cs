@@ -223,7 +223,7 @@ namespace OxyPlot
         private static void HandleReset(IPlotView view, OxyInputEventArgs args)
         {
             args.Handled = true;
-            view.ActualModel.ResetAllAxes();
+            if (view.ActualModel != null) view.ActualModel.ResetAllAxes();
             view.InvalidatePlot(false);
         }
 
