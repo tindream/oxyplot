@@ -150,7 +150,7 @@ namespace OxyPlot.Axes
         /// <summary>
         /// 节点移动事件
         /// </summary>
-        public event Action<TrackerHitResult, double> NodeMoveEvent;
+        public event Action<TrackerHitResult, bool, double> NodeMoveEvent;
 
         /// <summary>
         /// Gets or sets the absolute maximum. This is only used for the UI control. It will not be possible to zoom/pan beyond this limit. The default value is <c>double.MaxValue</c>.
@@ -1025,7 +1025,7 @@ namespace OxyPlot.Axes
         /// <param name="cpt">The current point (screen coordinates).</param>
         public virtual void Pan(TrackerHitResult node, ScreenPoint ppt, ScreenPoint cpt)
         {
-            if (!this.IsPanEnabled || !this.IsNodeMoveEnabled)
+            if (!this.IsPanEnabled && !this.IsNodeMoveEnabled)
             {
                 return;
             }
@@ -1033,7 +1033,7 @@ namespace OxyPlot.Axes
             bool isHorizontal = this.IsHorizontal();
 
             double dsx = isHorizontal ? cpt.X - ppt.X : cpt.Y - ppt.Y;
-            if (!this.IsPanEnabled)
+            if (this.IsPanEnabled)
             {
                 this.Pan(dsx);
             }
@@ -1042,7 +1042,7 @@ namespace OxyPlot.Axes
                 var handler = this.NodeMoveEvent;
                 if (handler != null)
                 {
-                    handler(node, dsx);
+                    handler(node, isHorizontal, dsx);
                 }
             }
         }
