@@ -147,9 +147,10 @@ namespace OxyPlot.Axes
         /// <summary>
         /// Pans the specified axis.
         /// </summary>
+        /// <param name="node">节点</param>
         /// <param name="ppt">The previous point (screen coordinates).</param>
         /// <param name="cpt">The current point (screen coordinates).</param>
-        public override void Pan(ScreenPoint ppt, ScreenPoint cpt)
+        public override void Pan(TrackerHitResult node, ScreenPoint ppt, ScreenPoint cpt)
         {
             if (!this.IsPanEnabled)
             {

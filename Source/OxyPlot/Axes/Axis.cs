@@ -148,6 +148,11 @@ namespace OxyPlot.Axes
         public event EventHandler TransformChanged;
 
         /// <summary>
+        /// 节点移动事件
+        /// </summary>
+        public event Action<TrackerHitResult, double> NodeMoveEvent;
+
+        /// <summary>
         /// Gets or sets the absolute maximum. This is only used for the UI control. It will not be possible to zoom/pan beyond this limit. The default value is <c>double.MaxValue</c>.
         /// </summary>
         public double AbsoluteMaximum { get; set; }
@@ -332,6 +337,11 @@ namespace OxyPlot.Axes
         /// Gets or sets a value indicating whether panning is enabled. The default value is <c>true</c>.
         /// </summary>
         public bool IsPanEnabled { get; set; }
+
+        /// <summary>
+        /// 节点移动开关
+        /// </summary>
+        public bool IsNodeMoveEnabled { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether this axis is reversed. It is reversed if <see cref="StartPosition" /> &gt; <see cref="EndPosition" />.
@@ -1010,11 +1020,12 @@ namespace OxyPlot.Axes
         /// <summary>
         /// Pans the specified axis.
         /// </summary>
+        /// <param name="node">节点</param>
         /// <param name="ppt">The previous point (screen coordinates).</param>
         /// <param name="cpt">The current point (screen coordinates).</param>
-        public virtual void Pan(ScreenPoint ppt, ScreenPoint cpt)
+        public virtual void Pan(TrackerHitResult node, ScreenPoint ppt, ScreenPoint cpt)
         {
-            if (!this.IsPanEnabled)
+            if (!this.IsPanEnabled || !this.IsNodeMoveEnabled)
             {
                 return;
             }
@@ -1022,7 +1033,18 @@ namespace OxyPlot.Axes
             bool isHorizontal = this.IsHorizontal();
 
             double dsx = isHorizontal ? cpt.X - ppt.X : cpt.Y - ppt.Y;
-            this.Pan(dsx);
+            if (!this.IsPanEnabled)
+            {
+                this.Pan(dsx);
+            }
+            else if (this.IsNodeMoveEnabled && node != null)
+            {
+                var handler = this.NodeMoveEvent;
+                if (handler != null)
+                {
+                    handler(node, dsx);
+                }
+            }
         }
 
         /// <summary>

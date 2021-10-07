@@ -34,13 +34,23 @@ namespace OxyPlot
         private bool IsPanEnabled { get; set; }
 
         /// <summary>
+        /// 节点移动开关
+        /// </summary>
+        private bool IsNodeMoveEnabled { get; set; }
+
+        /// <summary>
+        /// 当前节点
+        /// </summary>
+        public TrackerHitResult Current { get; set; }
+
+        /// <summary>
         /// Occurs when a manipulation is complete.
         /// </summary>
         /// <param name="e">The <see cref="OxyInputEventArgs" /> instance containing the event data.</param>
         public override void Completed(OxyMouseEventArgs e)
         {
             base.Completed(e);
-            if (!this.IsPanEnabled)
+            if (!this.IsPanEnabled && !this.IsNodeMoveEnabled)
             {
                 return;
             }
@@ -56,19 +66,19 @@ namespace OxyPlot
         public override void Delta(OxyMouseEventArgs e)
         {
             base.Delta(e);
-            if (!this.IsPanEnabled)
+            if (!this.IsPanEnabled && !this.IsNodeMoveEnabled)
             {
                 return;
             }
 
             if (this.XAxis != null)
             {
-                this.XAxis.Pan(this.PreviousPosition, e.Position);
+                this.XAxis.Pan(this.Current, this.PreviousPosition, e.Position);
             }
 
             if (this.YAxis != null)
             {
-                this.YAxis.Pan(this.PreviousPosition, e.Position);
+                this.YAxis.Pan(this.Current, this.PreviousPosition, e.Position);
             }
 
             this.PlotView.InvalidatePlot(false);
@@ -85,13 +95,35 @@ namespace OxyPlot
             base.Started(e);
             this.PreviousPosition = e.Position;
 
-            this.IsPanEnabled = (this.XAxis != null && this.XAxis.IsPanEnabled)
-                                || (this.YAxis != null && this.YAxis.IsPanEnabled);
+            this.IsPanEnabled = (this.XAxis != null && this.XAxis.IsPanEnabled) || (this.YAxis != null && this.YAxis.IsPanEnabled);
+            this.IsNodeMoveEnabled = (this.XAxis != null && this.XAxis.IsNodeMoveEnabled) || (this.YAxis != null && this.YAxis.IsNodeMoveEnabled);
 
             if (this.IsPanEnabled)
             {
                 this.View.SetCursorType(CursorType.Pan);
                 e.Handled = true;
+            }
+            else if (this.IsNodeMoveEnabled)
+            {
+                var actualModel = this.PlotView.ActualModel;
+                if (actualModel != null)
+                {
+                    foreach (var series in actualModel.Series)//多曲线显示
+                    {
+                        var result = series.GetNearestPoint(e.Position, false);
+                        if (result != null)
+                        {
+                            if (result.Position.DistanceTo(e.Position) < series.TrackerPoint)
+                            {
+                                this.Current = result;
+                                this.View.SetCursorType(CursorType.Pan);
+                                e.Handled = true;
+                                return;
+                            }
+                        }
+                    }
+                }
+                this.IsNodeMoveEnabled = false;
             }
         }
     }
