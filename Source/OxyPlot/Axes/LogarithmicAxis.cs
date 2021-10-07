@@ -150,11 +150,11 @@ namespace OxyPlot.Axes
         /// <param name="node">节点</param>
         /// <param name="ppt">The previous point (screen coordinates).</param>
         /// <param name="cpt">The current point (screen coordinates).</param>
-        public override void Pan(TrackerHitResult node, ScreenPoint ppt, ScreenPoint cpt)
+        public override bool Pan(TrackerHitResult node, ScreenPoint ppt, ScreenPoint cpt)
         {
             if (!this.IsPanEnabled)
             {
-                return;
+                return true;
             }
 
             var isHorizontal = this.IsHorizontal();
@@ -164,7 +164,7 @@ namespace OxyPlot.Axes
 
             if (Math.Abs(x1) < double.Epsilon)
             {
-                return;
+                return true;
             }
 
             var oldMinimum = this.ActualMinimum;
@@ -193,6 +193,7 @@ namespace OxyPlot.Axes
             var deltaMaximum = this.ActualMaximum - oldMaximum;
 
             this.OnAxisChanged(new AxisChangedEventArgs(AxisChangeTypes.Pan, deltaMinimum, deltaMaximum));
+            return true;
         }
 
         /// <summary>

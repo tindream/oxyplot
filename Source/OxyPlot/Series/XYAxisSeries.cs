@@ -110,7 +110,7 @@ namespace OxyPlot.Series
         {
             if (this.TrackerFormatStringAction != null)
             {
-                return this.TrackerFormatStringAction(this.Title,
+                return this.TrackerFormatStringAction(result.Item, this.Title,
                     this.XAxis.Title ?? XYAxisSeries.DefaultXAxisTitle,
                     this.XAxis.GetValue(result.DataPoint.X),
                     this.YAxis.Title ?? XYAxisSeries.DefaultYAxisTitle,

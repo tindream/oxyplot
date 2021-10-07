@@ -240,7 +240,7 @@ namespace OxyPlot.Series
 
             if (this.TrackerFormatStringAction != null)
             {
-                return this.TrackerFormatStringAction(this.Title,
+                return this.TrackerFormatStringAction(item, this.Title,
                     null, categoryAxis.FormatValue(categoryIndex),
                     null, valueAxis.GetValue(barItem.Value));
             }

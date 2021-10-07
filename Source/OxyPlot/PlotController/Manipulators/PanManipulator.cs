@@ -73,12 +73,14 @@ namespace OxyPlot
 
             if (this.XAxis != null)
             {
-                this.XAxis.Pan(this.Current, this.PreviousPosition, e.Position);
+                var result = this.XAxis.Pan(this.Current, this.PreviousPosition, e.Position);
+                if (!result) e.Position = new ScreenPoint(this.PreviousPosition.X, e.Position.Y);
             }
 
             if (this.YAxis != null)
             {
-                this.YAxis.Pan(this.Current, this.PreviousPosition, e.Position);
+                var result = this.YAxis.Pan(this.Current, this.PreviousPosition, e.Position);
+                if (!result) e.Position = new ScreenPoint(e.Position.X, this.PreviousPosition.Y);
             }
 
             this.PlotView.InvalidatePlot(false);

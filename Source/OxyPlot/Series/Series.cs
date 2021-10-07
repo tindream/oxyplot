@@ -76,7 +76,7 @@ namespace OxyPlot.Series
         /// <summary>
         /// 格式化方法
         /// </summary>
-        public Func<string, string, object, string, object, string> TrackerFormatStringAction { get; set; }
+        public Func<object, string, string, object, string, object, string> TrackerFormatStringAction { get; set; }
 
         /// <summary>
         /// 有效跟踪范围，默认值：9
