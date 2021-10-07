@@ -127,6 +127,10 @@ namespace OxyPlot.Series
         /// </summary>
         /// <value>The label format string.</value>
         public string LabelFormatString { get; set; }
+        /// <summary>
+        /// label格式化方法
+        /// </summary>
+        public Func<object, DataPoint, int, string> LabelFormatStringAction { get; set; }
 
         /// <summary>
         /// Gets or sets the label margins. The default is <c>6</c>.
@@ -325,7 +329,7 @@ namespace OxyPlot.Series
 
             this.RenderPoints(rc, actualPoints);
 
-            if (this.LabelFormatString != null)
+            if (this.LabelFormatString != null || this.LabelFormatStringAction != null)
             {
                 // render point labels (not optimized for performance)
                 this.RenderPointLabels(rc);
@@ -605,7 +609,7 @@ namespace OxyPlot.Series
                 var pt = this.Transform(point) + new ScreenVector(0, -this.LabelMargin);
 
                 var item = this.GetItem(index);
-                var s = StringHelper.Format(this.ActualCulture, this.LabelFormatString, item, point.X, point.Y);
+                var s = this.LabelFormatStringAction != null ? this.LabelFormatStringAction(item, point, index) : StringHelper.Format(this.ActualCulture, this.LabelFormatString, item, point.X, point.Y, index);
 
 #if SUPPORTLABELPLACEMENT
                     switch (this.LabelPlacement)
