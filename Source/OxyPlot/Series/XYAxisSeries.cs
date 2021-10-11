@@ -355,6 +355,10 @@ namespace OxyPlot.Series
                 var sp = this.Transform(p.x, p.y);
                 //double d2 = (sp - point).LengthSquared;
                 double d2 = Math.Abs(sp.x - point.x);//X轴坐标定位显示
+                if (PlotController.ISmall)
+                {
+                    d2 = Math.Sqrt(Math.Pow(sp.x - point.x, 2) + Math.Pow(sp.y - point.y, 2));
+                }
 
                 if (d2 < minimumDistance)
                 {

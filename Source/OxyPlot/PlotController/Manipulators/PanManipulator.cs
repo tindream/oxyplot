@@ -115,7 +115,7 @@ namespace OxyPlot
                         var result = series.GetNearestPoint(e.Position, false);
                         if (result != null)
                         {
-                            if (result.Position.DistanceTo(e.Position) < series.TrackerPoint)
+                            if (result.Position.DistanceTo(e.Position) < series.MovePoint)
                             {
                                 this.Current = result;
                                 this.View.SetCursorType(CursorType.Pan);
