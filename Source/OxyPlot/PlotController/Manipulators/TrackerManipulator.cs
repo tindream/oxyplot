@@ -152,7 +152,7 @@ namespace OxyPlot
                 var result = series.GetNearestPoint(point, false);
                 if (result != null)
                 {
-                    if (series.TrackerPoint == 0 || result.Position.DistanceTo(point) < series.TrackerPoint)//不限定范围，显示当前曲线点
+                    if (result.Position.DistanceTo(point) < series.TrackerPoint)//不限定范围，显示当前曲线点
                     {
                         return result;
                     }

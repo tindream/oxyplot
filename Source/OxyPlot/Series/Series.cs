@@ -79,9 +79,9 @@ namespace OxyPlot.Series
         public Func<object, string, string, object, string, object, string> TrackerFormatStringAction { get; set; }
 
         /// <summary>
-        /// 有效跟踪范围，默认值：0不限制
+        /// 有效跟踪范围，默认值：最大值不限制跟踪
         /// </summary>
-        public int TrackerPoint { get; set; }
+        public double TrackerPoint { get; set; } = int.MaxValue;
 
         /// <summary>
         /// 有效移动范围，默认值：9
