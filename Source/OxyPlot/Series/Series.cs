@@ -79,14 +79,16 @@ namespace OxyPlot.Series
         public Func<object, string, string, object, string, object, string> TrackerFormatStringAction { get; set; }
 
         /// <summary>
-        /// 有效跟踪范围，默认值：最大值不限制跟踪
+        /// 有效跟踪范围
+        /// <para>默认值=int.MaxValue，不限制跟踪</para>
         /// </summary>
         public double TrackerPoint { get; set; } = int.MaxValue;
 
         /// <summary>
-        /// 有效移动范围，默认值：9
+        /// 有效移动范围
+        /// <para>默认值=0，不移动</para>
         /// </summary>
-        public int MovePoint { get; set; } = 9;
+        public int MovePoint { get; set; } 
 
         /// <summary>
         /// Gets or sets the key for the tracker to use on this series. The default is <c>null</c>.
