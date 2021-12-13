@@ -269,7 +269,7 @@ namespace OxyPlot.Series
         /// Gets the smoothed points.
         /// </summary>
         /// <value>The smoothed points.</value>
-        protected List<DataPoint> SmoothedPoints
+        public List<DataPoint> SmoothedPoints
         {
             get
             {
