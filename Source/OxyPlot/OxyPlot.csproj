@@ -6,8 +6,8 @@
         <Copyright>Copyright (c) 2014 OxyPlot contributors</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://oxyplot.github.io/</PackageProjectUrl>
-        <Version>1.1</Version>
-        <FileVersion>1.1</FileVersion>
+        <Version>1.0.2</Version>
+        <FileVersion>1.0.2</FileVersion>
         <PackageIcon>OxyPlot_128.png</PackageIcon>
         <PackageTags>plotting plot charting chart</PackageTags>
         <RepositoryType>git</RepositoryType>
