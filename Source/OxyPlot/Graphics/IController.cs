@@ -15,10 +15,6 @@ namespace OxyPlot
     public interface IController
     {
         /// <summary>
-        /// 小数据模式标记
-        /// </summary>
-        bool ISmall { get; set; }
-        /// <summary>
         /// Handles mouse down events.
         /// </summary>
         /// <param name="view">The plot view.</param>

@@ -17,7 +17,7 @@ namespace OxyPlot
         /// <summary>
         /// Initializes a new instance of the <see cref="PlotController" /> class.
         /// </summary>
-        public PlotController()
+        public PlotController(bool iSamll = true)
         {
             // Zoom rectangle bindings: MMB / control RMB / control+alt LMB
             this.BindMouseDown(OxyMouseButton.Middle, PlotCommands.ZoomRectangle);
@@ -34,7 +34,7 @@ namespace OxyPlot
             this.BindCore(new OxyShakeGesture(), PlotCommands.Reset);
 
             // Pan bindings: RMB / alt LMB / Up/down/left/right keys (panning direction on axis is opposite of key as it is more intuitive)
-            if (ISmall)
+            if (iSamll)
             {
                 this.BindMouseDown(OxyMouseButton.Left, PlotCommands.PanAt);//左键移动
             }
@@ -55,7 +55,7 @@ namespace OxyPlot
             this.BindTouchDown(PlotCommands.PanZoomByTouch);
 
             // Tracker bindings: LMB
-            if (ISmall)
+            if (iSamll)
             {
                 this.BindMouseMove(PlotCommands.SnapTrackMove);
             }

@@ -103,6 +103,7 @@ namespace OxyPlot
             string desc = string.Empty;
             foreach (var series in actualModel.Series)//多曲线显示
             {
+                if (!series.IsVisible) continue;
                 var temp = GetNearestHit(series, e.Position, this.Snap, this.PointsOnly);
                 if (temp != null) desc += temp.Text;
             }

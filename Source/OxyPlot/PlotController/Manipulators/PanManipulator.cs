@@ -112,6 +112,7 @@ namespace OxyPlot
                 {
                     foreach (var series in actualModel.Series)//多曲线显示
                     {
+                        if (!series.IsVisible) continue;
                         var result = series.GetNearestPoint(e.Position, false);
                         if (result != null)
                         {

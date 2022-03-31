@@ -90,6 +90,11 @@ namespace OxyPlot
         private Exception lastPlotException;
 
         /// <summary>
+        /// 小数据模式标记
+        /// </summary>
+        public bool ISmall { get; set; } = true;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="PlotModel" /> class.
         /// </summary>
         public PlotModel()

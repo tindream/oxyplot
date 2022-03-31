@@ -18,10 +18,6 @@ namespace OxyPlot
     public abstract class ControllerBase : IController
     {
         /// <summary>
-        /// 小数据模式
-        /// </summary>
-        public bool ISmall { get; set; } = true;
-        /// <summary>
         /// A synchronization object that is used when the actual model in the current view is <c>null</c>.
         /// </summary>
         private readonly object syncRoot = new object();
@@ -504,7 +500,7 @@ namespace OxyPlot
 
             return binding.Command;
         }
-        
+
         /// <summary>
         /// Handles a command triggered by an input gesture.
         /// </summary>

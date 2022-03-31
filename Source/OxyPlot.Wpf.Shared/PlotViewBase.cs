@@ -107,7 +107,7 @@ namespace OxyPlot.Wpf
         /// Gets the actual PlotView controller.
         /// </summary>
         /// <value>The actual PlotView controller.</value>
-        public IPlotController ActualController => this.Controller ?? (this.defaultController ??= new PlotController());
+        public IPlotController ActualController => this.Controller ?? (this.defaultController ??= new PlotController(ActualModel.ISmall));
 
         /// <inheritdoc/>
         IController IView.ActualController => this.ActualController;
