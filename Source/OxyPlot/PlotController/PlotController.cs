@@ -15,10 +15,6 @@ namespace OxyPlot
     public class PlotController : ControllerBase, IPlotController
     {
         /// <summary>
-        /// 小数据模式
-        /// </summary>
-        public bool ISmall { get; set; } = true;
-        /// <summary>
         /// Initializes a new instance of the <see cref="PlotController" /> class.
         /// </summary>
         public PlotController()

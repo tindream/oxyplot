@@ -14,9 +14,5 @@ namespace OxyPlot
     /// </summary>
     public interface IPlotController : IController
     {
-        /// <summary>
-        /// 小数据模式标记
-        /// </summary>
-        bool ISmall { get; set; }
     }
 }

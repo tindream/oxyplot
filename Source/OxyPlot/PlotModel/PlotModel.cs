@@ -90,11 +90,6 @@ namespace OxyPlot
         private Exception lastPlotException;
 
         /// <summary>
-        /// Tracke锁
-        /// </summary>
-        public object TrackerLock = new object();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PlotModel" /> class.
         /// </summary>
         public PlotModel()
