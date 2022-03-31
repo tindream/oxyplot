@@ -17,7 +17,7 @@ namespace OxyPlot
         /// <summary>
         /// 小数据模式
         /// </summary>
-        public static bool ISmall = true;
+        public bool ISmall { get; set; } = true;
         /// <summary>
         /// Initializes a new instance of the <see cref="PlotController" /> class.
         /// </summary>
