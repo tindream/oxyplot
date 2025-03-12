@@ -75,6 +75,10 @@ namespace OxyPlot.Series
         /// </summary>
         /// <value>The label format string.</value>
         public string LabelFormatString { get; set; }
+        /// <summary>
+        /// label格式化方法
+        /// </summary>
+        public Func<object, double, string> LabelFormatStringAction { get; set; }
 
         /// <summary>
         /// Gets or sets the label margins.
@@ -312,7 +316,7 @@ namespace OxyPlot.Series
             double categoryValue,
             double categoryEndValue)
         {
-            var s = StringHelper.Format(this.ActualCulture, this.LabelFormatString, item, item.Value);
+            var s = this.LabelFormatStringAction != null ? this.LabelFormatStringAction(item, item.Value) : StringHelper.Format(this.ActualCulture, this.LabelFormatString, item, item.Value);
             HorizontalAlignment ha;
             ScreenPoint pt;
             var y = (categoryEndValue + categoryValue) / 2;
@@ -415,7 +419,7 @@ namespace OxyPlot.Series
 
                 this.RenderItem(rc, topValue, categoryValue, actualBarWidth, item, rect);
 
-                if (this.LabelFormatString != null)
+                if (this.LabelFormatString != null || this.LabelFormatStringAction != null)
                 {
                     this.RenderLabel(
                         rc,
