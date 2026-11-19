@@ -68,13 +68,12 @@ namespace OxyPlot.Series
 
         /// <summary>
         /// Gets or sets a format string used for the tracker. The default depends on the series.
+        /// <para>Item,Title,X.Title,X.Value,Y.Title,Y.Value</para>
         /// </summary>
-        /// <remarks>
-        /// The arguments for the format string may be different for each type of series. See the documentation.
-        /// </remarks>
         public string TrackerFormatString { get; set; }
         /// <summary>
         /// 格式化方法
+        /// <para>Item,Title,X.Title,X.Value,Y.Title,Y.Value</para>
         /// </summary>
         public Func<object, string, string, object, string, object, string> TrackerFormatStringAction { get; set; }
 
@@ -88,7 +87,7 @@ namespace OxyPlot.Series
         /// 有效移动范围
         /// <para>默认值=0，不移动</para>
         /// </summary>
-        public int MovePoint { get; set; } 
+        public int MovePoint { get; set; }
 
         /// <summary>
         /// Gets or sets the key for the tracker to use on this series. The default is <c>null</c>.

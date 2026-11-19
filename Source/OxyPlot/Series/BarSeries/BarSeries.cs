@@ -72,11 +72,12 @@ namespace OxyPlot.Series
 
         /// <summary>
         /// Gets or sets the label format string.
+        /// <para>Item,Item.Value</para>
         /// </summary>
-        /// <value>The label format string.</value>
         public string LabelFormatString { get; set; }
         /// <summary>
         /// label格式化方法
+        /// <para>Item,Item.Value</para>
         /// </summary>
         public Func<object, double, string> LabelFormatStringAction { get; set; }
 
